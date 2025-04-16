@@ -1,0 +1,37 @@
+<div class="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow-md">
+  <h2 class="text-2xl font-bold mb-4">Create New User</h2>
+
+  <%= form_with model: @user, url: users_path, local: true do |form| %>
+    <div class="mb-4">
+      <%= form.label :first_name, class: "block font-medium text-gray-700" %>
+      <%= form.text_field :first_name, class: "mt-1 p-2 w-full border rounded-md" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :last_name, class: "block font-medium text-gray-700" %>
+      <%= form.text_field :last_name, class: "mt-1 p-2 w-full border rounded-md" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :email, class: "block font-medium text-gray-700" %>
+      <%= form.email_field :email, class: "mt-1 p-2 w-full border rounded-md" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :phone_number, class: "block font-medium text-gray-700" %>
+      <%= form.text_field :phone_number, class: "mt-1 p-2 w-full border rounded-md" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :password, class: "block font-medium text-gray-700" %>
+      <%= form.password_field :password, class: "mt-1 p-2 w-full border rounded-md" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :password_confirmation, class: "block font-medium text-gray-700" %>
+      <%= form.password_field :password_confirmation, class: "mt-1 p-2 w-full border rounded-md" %>
+    </div>
+
+    <%= form.submit "Create User", class: "bg-blue-500 text-white px-4 py-2 rounded cursor-pointer" %>
+  <% end %>
+</div>

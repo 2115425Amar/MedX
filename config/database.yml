@@ -1,0 +1,36 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: medical
+  username: Amar_Gupta
+  password: Admin@123
+  host: localhost
+
+test:
+  <<: *default
+  database: medical_test
+  username: Amar_Gupta
+  password: Admin@123
+  host: localhost
+  
+
+production:
+  primary:
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
+
+  cable:  # ✅ Fix: Required for ActionCable
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
+
+  queue:  # ✅ Fix: Required for SolidQueue
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
+
+  cache:  # ✅ Fix: Required for SolidCache
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>

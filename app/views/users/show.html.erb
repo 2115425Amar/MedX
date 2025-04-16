@@ -1,0 +1,26 @@
+<div class="user-profile">
+  <h1><%= @user.name %></h1>
+
+  <div class="user-details">
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+
+    <p>
+      <strong>Phone:</strong>
+      <%= @user.phone_number %>
+    </p>
+
+    <% if @user.avatar_url.present? %>
+      <div class="avatar">
+        <%= image_tag @user.avatar_url %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Edit', edit_user_path(@user) if current_user == @user || current_user.admin? %>
+    <%= link_to 'Back', users_path %>
+  </div>
+</div> 

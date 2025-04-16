@@ -1,0 +1,56 @@
+<body>
+  <!-- Fixed Navbar -->
+  <nav class="fixed top-0 w-full md:w-[84%] z-40 bg-white ">
+    <div class="flex justify-center md:py-2">
+      <div class="flex w-full justify-between items-center">
+        <!-- Sidebar Toggle Button -->
+        <button id="sidebarToggle" class="ml-2 p-4 mr-4 py-1 z-50 bg-blue-500 text-white rounded md:hidden">
+          ☰
+        </button>
+
+        <!-- Search Bar -->
+        <div class="flex md:gap-2 p-2 md:p-3 items-center w-[80%] border-2 border-[#3333334D] rounded-2xl">
+          <img src="<%= asset_path('search.svg') %>" class="w-4 md:w-6" alt="icon">
+          <input class="md:text-lg font-['Montserrat'] text-sm md:font-semibold text-gray-600 focus:outline-none w-1/2 md:w-full" placeholder="Search for something here...">
+        </div>
+
+        <!-- User Info -->
+        <%= link_to profile_path, class: "flex gap-0 md:gap-4 p-2 items-center md:border-2 border-[#3333334D] rounded-2xl ml-2 hover:bg-gray-100 transition-colors" do %>
+          <div class="flex flex-col">
+            <% if current_user %>
+              <!-- User Name -->
+              <h2 class="text-sm md:text-lg mb-1">
+                <%= current_user.first_name %> <%= current_user.last_name %>
+              </h2>
+              <!-- User Role -->
+              <% if current_user.has_role?(:admin) %>
+                <div class="text-[8%] md:text-sm hidden md:block">Admin</div>
+              <% else %>
+                <div class="text-[8%] md:text-sm hidden md:block">User</div>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- User Avatar -->
+          <%= image_tag current_user.avatar_url, class: "w-6 h-6 md:w-10 md:h-10 rounded-full" %>
+        <% end %>
+      </div>
+    </div>
+  <hr class="w-full">
+
+  </nav>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const sidebar = document.getElementById("sidebar");
+      const toggleBtn = document.getElementById("sidebarToggle");
+
+      if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener("click", function() {
+        //   console.log("Toggle button clicked");
+          sidebar.classList.toggle("-translate-x-full");
+        });
+      }
+    });
+  </script>
+  
+</body>

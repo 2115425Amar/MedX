@@ -1,0 +1,15 @@
+<!-- app/views/comments/_comment.html.erb -->
+<div id="comment-<%= comment.id %>" class="flex justify-between items-start bg-gray-50 p-4 rounded-lg shadow-sm">
+  <div class="flex-1">
+    <div class="flex items-center space-x-2">
+      <strong class="text-gray-800"><%= comment.user.first_name %> <%= comment.user.last_name %></strong>
+      <span class="text-sm text-gray-500"><%= time_ago_in_words(comment.created_at) %> ago</span>
+    </div>
+    <p class="text-gray-600 mt-1"><%= comment.content %></p>
+  </div>
+  <div class="flex items-center space-x-2">
+    <button class="text-gray-500 hover:text-blue-600">
+      <img src="<%= asset_path('dil.svg') %>" alt="Like" class="w-5 h-5">
+    </button>
+  </div>
+</div>

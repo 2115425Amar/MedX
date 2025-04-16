@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>med - Reset Password</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="text-white relative overflow-hidden font-[Montserrat]">
+  <div style="background-image: url(<%= asset_path('bg.jpg') %>);" class="bg-cover h-screen">
+
+    <!-- Navigation Bar -->
+    <%= render 'devise/shared/nav' %>
+    <hr>
+
+    <!-- Main Content - Reset Password Card -->
+    <div class="flex justify-center items-center mt-[15%] sm:mt-[5%] text-white">
+      <!-- Reset Password form container with blur effect -->
+      <div class="backdrop-blur-md bg-white/15 sm:h-[60%] md:w-[25%] rounded-xl p-10">
+        <h2 class="text-2xl font-semibold mb-6">Reset Password</h2>
+
+        <!-- Devise Reset Password Form -->
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "space-y-4" }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <%= f.hidden_field :reset_password_token %>
+
+          <!-- New Password field -->
+          <div>
+            <label class="block text-sm mb-1">New Password</label>
+            <%= f.password_field :password,
+                                 class: "w-full px-3 py-2 rounded-md text-black bg-white focus:outline-none focus:border-blue-500",
+                                 placeholder: "Enter new password", required: true %>
+          </div>
+
+          <!-- Confirm New Password field -->
+          <div>
+            <label class="block text-sm mb-1">Confirm New Password</label>
+            <%= f.password_field :password_confirmation,
+                                 class: "w-full px-3 py-2 rounded-md text-black bg-white focus:outline-none focus:border-blue-500",
+                                 placeholder: "Confirm new password", required: true %>
+          </div>
+
+          <!-- Submit button -->
+          <%= f.submit "Reset Password", class: "w-full py-2 bg-blue-500 hover:bg-blue-600 rounded-md text-white transition-colors mt-6" %>
+        <% end %>
+
+        <!-- Back to Login link -->
+        <p class="mt-4 text-sm">
+          <a href="<%= new_user_session_path %>" class="text-blue-400 hover:text-blue-600">Back to Login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

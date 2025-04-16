@@ -1,0 +1,219 @@
+The `user_spec.rb` file is an RSpec test file that verifies the behavior of the `User` model in your Ruby on Rails application. It consists of several test sections to ensure that the model functions as expected. Let’s go through it step by step.
+
+---
+
+## **1. Validation Tests**
+### **Purpose:**  
+To ensure that the model enforces the required constraints on attributes.
+
+```ruby
+describe 'validations' do
+  it { should validate_presence_of(:email) }
+  it { should validate_presence_of(:phone_number) }
+  it { should validate_uniqueness_of(:phone_number) }
+  it { should validate_presence_of(:first_name) }
+  it { should validate_presence_of(:last_name) }
+  it { should validate_uniqueness_of(:email).case_insensitive }
+```
+These tests check that:  
+✅ `email`, `phone_number`, `first_name`, and `last_name` **must be present**  
+✅ `email` and `phone_number` **must be unique**  
+✅ `email` **is case insensitive** (e.g., `TEST@EXAMPLE.COM` is treated the same as `test@example.com`)
+
+---
+
+### **Email Format Validation**
+```ruby
+it { should allow_value('test@example.com').for(:email) }
+it { should_not allow_value('invalid-email').for(:email) }
+```
+✅ Ensures only valid email formats are accepted.  
+
+---
+
+### **Phone Number Format Validation**
+```ruby
+it { should allow_value('1234567811').for(:phone_number) }
+it { should_not allow_value('12345').for(:phone_number) }
+```
+✅ Ensures only 10-digit phone numbers are accepted.  
+✅ Invalid phone numbers like `"12345"` are rejected.
+
+---
+
+## **2. Association Tests**
+### **Purpose:**  
+To verify that the `User` model has the correct relationships with other models.
+
+```ruby
+describe 'associations' do
+  it { should have_many(:posts).dependent(:destroy) }
+  it { should have_many(:likes).dependent(:destroy) }
+  it { should have_many(:comments).dependent(:destroy) }
+end
+```
+✅ Ensures that a `User` **can have many posts, likes, and comments**.  
+✅ **When a user is deleted, their posts, likes, and comments are also deleted.**
+
+---
+
+## **3. Role Management Tests**
+### **Purpose:**  
+To ensure that a `User` is assigned the correct default role.
+
+```ruby
+describe 'roles' do
+  let(:user) { create(:user) }
+
+  it 'assigns default role after creation' do
+    expect(user.has_role?(:user)).to be_truthy
+  end
+end
+```
+✅ Ensures every user **automatically gets the "user" role** when created.  
+✅ This is handled by the `assign_default_role` method in `User`:
+
+```ruby
+def assign_default_role
+  self.add_role(:user) if self.roles.blank?
+end
+```
+
+---
+
+## **4. Avatar URL Tests**
+### **Purpose:**  
+To check if the `avatar_url` method correctly returns the user’s profile picture URL.
+
+```ruby
+describe '#avatar_url' do
+  let(:user) { create(:user, avatar_public_id: 'sample_public_id') }
+
+  it 'returns Cloudinary URL if avatar is uploaded' do
+    expect(user.avatar_url).to include('sample_public_id')
+  end
+
+  it 'returns default avatar if no avatar is uploaded' do
+    user.avatar_public_id = nil
+    expect(user.avatar_url).to match(/imageavatar.*\.jpg/)
+  end
+end
+```
+✅ **If the user has uploaded an avatar, it should return the Cloudinary URL.**  
+✅ **If the user has no avatar, it should return a default image.**  
+
+In the `User` model:
+
+```ruby
+def avatar_url
+  if avatar_public_id.present?
+    Cloudinary::Utils.cloudinary_url(avatar_public_id, width: 150, height: 150, crop: :fill)
+  else
+    ActionController::Base.helpers.asset_path("imageavatar.jpg")
+  end
+end
+```
+
+---
+
+## **5. Name Method Test**
+### **Purpose:**  
+To check if the `#name` method correctly returns the full name.
+
+```ruby
+describe '#name' do
+  let(:user) { build(:user, first_name: 'John', last_name: 'Doe') }
+
+  it 'returns full name' do
+    expect(user.name).to eq('John Doe')
+  end
+end
+```
+✅ Ensures `user.name` returns `"John Doe"`.  
+
+In the `User` model:
+
+```ruby
+def name
+  "#{first_name} #{last_name}"
+end
+```
+
+---
+
+## **6. Admin Role Test**
+### **Purpose:**  
+To check if the `admin?` method correctly identifies admin users.
+
+```ruby
+describe '#admin?' do
+  it 'returns true if user has admin role' do
+    admin = create(:user, :admin)
+    expect(admin.admin?).to be true
+  end
+
+  it 'returns false if user does not have admin role' do
+    user = create(:user)
+    expect(user.admin?).to be false
+  end
+end
+```
+✅ **Admin users should return `true` for `admin?`**  
+✅ **Regular users should return `false`**  
+
+In the `User` model:
+
+```ruby
+def admin?
+  has_role?(:admin)
+end
+```
+
+---
+
+## **7. Callback Tests**
+### **Purpose:**  
+To ensure `assign_default_role` is called when a user is created.
+
+```ruby
+describe 'callbacks' do
+  let(:user) { build(:user) }
+
+  it 'calls assign_default_role after create' do
+    expect(user).to receive(:assign_default_role)
+    user.run_callbacks(:create)
+  end
+end
+```
+✅ Ensures `assign_default_role` runs after user creation.
+
+In the `User` model:
+
+```ruby
+after_create :assign_default_role
+```
+
+---
+
+## **Summary of What’s Being Tested**
+| **Test Category**  | **What It Ensures** |
+|--------------------|--------------------|
+| **Validations**  | Email, phone number, first name, and last name are required and properly formatted. |
+| **Associations** | A user has many posts, comments, and likes, which are deleted when the user is deleted. |
+| **Roles** | Every user is assigned a "user" role by default. |
+| **Avatar URL** | Returns Cloudinary URL if the user uploaded an avatar, otherwise a default image. |
+| **Name Method** | Combines `first_name` and `last_name` to return full name. |
+| **Admin Check** | Returns `true` if the user has an admin role, `false` otherwise. |
+| **Callbacks** | Ensures `assign_default_role` runs when a user is created. |
+
+---
+
+## **How These Tests Work**
+1. **RSpec loads the `User` model** and prepares it for testing.
+2. **Each test case checks one specific behavior**:
+   - Example: `"it { should validate_presence_of(:email) }"` ensures that an error is raised if `email` is missing.
+3. **Factories (`create(:user)`) generate test data** automatically.
+4. **Tests run assertions (`expect(...)`) to check expected vs. actual behavior**.
+5. **If all tests pass, it means the `User` model is working correctly**.
+
+Let me know if you need further explanation! 🚀

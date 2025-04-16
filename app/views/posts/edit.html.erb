@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Post Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body class="flex">
+  <%= render 'devise/shared/navbar' %>
+
+  <div id="main">
+    <!-- NavBar -->
+    <div class="w3-container">
+      <div class="bg-gray-200 p-2 md:p-4 md:m-6 rounded-xl mt-[30%] md:mt-[10%]">
+        <main class="flex flex-col gap-4 bg-gray-200 rounded-2xl md:px-2 py-4 md:px-8 md:py-8">
+          <%= form_with model: @post, local: true do |form| %>
+            <div class="flex flex-col items-center justify-center py-4 px-2 md:px-8 md:py-8 bg-white rounded-2xl">
+              <div class="flex flex-col gap-y-5 w-full px-2">
+
+                <!-- Description -->
+                <div>
+                  <label for="description" class="block text-base font-medium text-gray-900">Description</label>
+                  <div class="mt-2">
+                    <%= form.text_area :description, rows: 3, class: "w-full px-4 py-3 bg-[#F5F6F8] rounded-xl focus:outline-none border border-black" %>
+                  </div>
+                </div>
+
+                <!-- Visibility -->
+                <div>
+                  <span class="block text-base font-medium text-gray-900">Visibility</span>
+                  <div class="flex gap-4 pt-1 mt-2">
+                    <label class="flex items-center gap-1 md:gap-2 cursor-pointer">
+                      <%= form.radio_button :public, true, checked: @post.public? %>
+                      <span class="text-gray-900 text-sm md:text-base">Public</span>
+                    </label>
+
+                    <label class="flex items-center gap-1 md:gap-2 cursor-pointer">
+                      <%= form.radio_button :public, false, checked: !@post.public? %>
+                      <span class="text-gray-900 text-sm md:text-base">Private</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col md:flex-row justify-between gap-4">
+                  <div class="flex justify-around gap-4 md:gap-6">
+                    <div class="flex items-center gap-2 hover:cursor-pointer">
+                      <img src="<%= asset_path('video.svg') %>" alt="">
+                      <p class="text-xs md:text-lg">Live Video</p>
+                    </div>
+                    <div class="flex items-center gap-2 hover:cursor-pointer">
+                      <img src="<%= asset_path('photo.svg') %>" alt="">
+                      <p class="text-xs md:text-lg">Photo/Video</p>
+                    </div>
+                    <div class="flex items-center gap-2 hover:cursor-pointer">
+                      <img src="<%= asset_path('feeling.svg') %>" alt="">
+                      <p class="text-xs md:text-lg">Feeling</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <%= form.submit "Update", class: "w-[50%] md:w-full bg-indigo-600 hover:bg-indigo-800 text-white py-3 md:px-8 rounded-lg text-xl font-medium hover:cursor-pointer" %>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          <% end %>
+        </main>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

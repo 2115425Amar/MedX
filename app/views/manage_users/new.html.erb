@@ -1,0 +1,80 @@
+<body class="flex">
+
+      <nav class="flex  md:py-2 md:mx-4">
+         <div class="flex w-full md:px-6 justify-between items-center">
+           <%= link_to manage_users_path do %>
+            <div class="flex gap-4 p-3 items-center">
+               <p class="text-1xl md:text-3xl font-serif font-semibold text-gray-600">Create Patients</p>
+            </div>
+            <% end %>
+            <div class="flex gap-4 items-center">
+              <%= image_tag current_user.avatar_url, class: "w-6 h-6 md:w-10 md:h-10 rounded-full" %>
+               <div class="">
+                  <h2 class="md:text-lg mb-1"><%= current_user.first_name %> <%= current_user.last_name %></h2>
+               </div>
+            </div>
+         </div>
+      </nav>
+
+      <hr class="w-full">
+ 
+  <div id="main-content" class="flex-1 p-3 md:p-6 transition-all duration-300" >
+
+    <!-- Main Content -->
+    <div class="w3-container">
+      <div class="rounded-xl bg-gray-100 h-full">
+        <!-- Create User Form -->
+
+        <div class="md:p-4  md:m-6 rounded-xl">
+          <div class="md:p-6 rounded-lg md:bg-gray-200 md:shadow-lg md:w-[80%] md:m-auto">
+            <%= form_with model: @user, url: manage_users_path, method: :post, class: "space-y-6 md:space-y-10 ml-4" do |f| %>
+
+             <%= link_to "Back to Users", manage_users_path, class: "text-blue-500 hover:text-blue-700 md:mb-4 inline-block" %>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <%= f.label :first_name, "First Name", class: "block font-medium text-gray-600" %>
+                  <%= f.text_field :first_name, required: true, class: "w-[90%] md:w-full  p-3 border rounded-md focus:ring-2 focus:ring-blue-400" %>
+                </div>
+                <div>
+                  <%= f.label :last_name, "Last Name", class: "block font-medium text-gray-600" %>
+                  <%= f.text_field :last_name, class: "w-[90%] md:w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-400" %>
+                </div>
+
+                <div>
+                  <%= f.label :phone_number, "Mobile No.", class: "block font-medium text-gray-600" %>
+                  <%= f.text_field :phone_number, required: true, class: "w-[90%] md:w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-400" %>
+                </div>
+                <div>
+                  <%= f.label :email, "Email", class: "block font-medium text-gray-600" %>
+                  <%= f.email_field :email, required: true, class: "w-[90%] md:w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-400" %>
+                </div>
+              </div>
+
+              <div class="md:mt-4">
+                <label class="font-semibold text-gray-700">Assign Role</label>
+                <div class="flex gap-4 mt-2">
+                  <label class="flex items-center space-x-2">
+                    <%= check_box_tag 'user[roles][]', 'admin', @user.has_role?(:admin), class: "h-5 w-5 text-blue-500" %>
+                    <span>Admin</span>
+                  </label>
+                  <label class="flex items-center space-x-2">
+                    <%= check_box_tag 'user[roles][]', 'user', true, disabled: true, class: "h-5 w-5 text-gray-400 cursor-not-allowed" %>
+                    <span class="text-gray-500">Patient (Default)</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="mt-6 mr-2 text-right">
+                <%= f.submit "Create Account", class: "bg-blue-500 text-white px-6 py-2 rounded-2xl hover:bg-blue-600 transition" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+</body>

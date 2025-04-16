@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>med - Forgot Password</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="text-white relative overflow-hidden font-[Montserrat]">
+  <div style="background-image: url(<%= asset_path('bg.jpg') %>);" class="bg-cover h-screen">
+
+    <!-- Navigation Bar -->
+    <%= render 'devise/shared/nav' %>
+    <hr>
+
+    <!-- Main Content - Forgot Password Card -->
+    <div class="flex justify-center items-center mt-[30%] sm:mt-[10%] text-white">
+      <!-- Forgot Password form container with blur effect -->
+      <div class="backdrop-blur-md bg-white/15 sm:h-[60%] md:w-[25%] rounded-xl p-10">
+        <h2 class="text-2xl font-semibold mb-6">Forgot Password</h2>
+
+        <!-- Devise Forgot Password Form -->
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "space-y-4" }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <!-- Email field -->
+          <div>
+            <label class="block text-sm mb-1">Email</label>
+            <%= f.email_field :email,
+                              class: "w-full px-3 py-2 rounded-md text-black bg-white focus:outline-none focus:border-blue-500",
+                              placeholder: "Enter your email", required: true %>
+          </div>
+
+          <!-- Submit button -->
+          <%= f.submit "Send Reset Instructions", class: "w-full py-2 bg-blue-500 hover:bg-blue-600 rounded-md text-white transition-colors mt-6" %>
+        <% end %>
+
+        <!-- Back to Login link -->
+        <p class="mt-4 text-sm">
+          Remember your password?
+          <a href="<%= new_user_session_path %>" class="text-blue-400 hover:text-blue-600">Log in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

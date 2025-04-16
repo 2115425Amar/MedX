@@ -1,0 +1,4 @@
+create method was overridden to handle custom logic like sending the email after the user is successfully created.
+The super call preserved the default Devise user creation flow.
+The welcome email is sent asynchronously with a fallback for errors.
+The after_sign_up_path_for method manages the post-signup redirection.
