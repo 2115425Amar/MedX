@@ -44,6 +44,10 @@ class User < ApplicationRecord
     has_role?(:admin)
   end
 
+  def doctor?
+    has_role?(:doctor)
+  end
+
 private
 
   def upload_avatar

@@ -48,7 +48,12 @@
         render :profile
       end
     end
-  
+
+
+    # if current_user.has_role?(:doctor)
+    #   # Doctor-specific logic here
+    # end
+
   
     def manage_users
       @users = User.page(params[:page]).per(10)

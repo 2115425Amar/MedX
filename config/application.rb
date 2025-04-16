@@ -1,5 +1,4 @@
 require_relative "boot"
-
 require "rails/all"
 
 require 'cloudinary'
@@ -7,6 +6,7 @@ require 'cloudinary'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+require 'chartkick'
 
 module DeviseAuth
   class Application < Rails::Application

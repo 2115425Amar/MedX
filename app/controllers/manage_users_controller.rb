@@ -13,11 +13,13 @@ class ManageUsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    
     if @user.save
       # Send welcome email
       UserMailer.welcome_email(@user).deliver_later
       redirect_to manage_users_path, notice: 'User was successfully created.'
     else
+      flash.now[:alert] = @user.errors.full_messages.join(", ")
       render :new
     end
   end
@@ -53,7 +55,7 @@ class ManageUsersController < ApplicationController
   private
 
   def require_admin
-    unless current_user.has_role?(:admin)
+    unless current_user.has_role?(:admin) || current_user.has_role?(:doctor)
       redirect_to root_path, alert: 'Access denied.'
     end
   end

@@ -82,3 +82,10 @@ gem 'cloudinary'
 # for sending emails 
 gem 'sendgrid-ruby'
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'groupdate'
+gem 'chart-js-rails'
+# Gemfile
+# gem 'chart-js' # Or 'chartkick' and 'chartjs' via npm if using webpacker
+
+gem "chartkick", "~> 5.1"

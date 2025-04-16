@@ -1,14 +1,10 @@
 # db/seeds.rb
-
-admin = User.create!(
-  email: "doctor@example.com",
-  password: "doctor",
-  password_confirmation: "doctor",
-  phone_number: "1234567899",
+# db/seeds.rb
+doctor = User.create!(
+  email: "doctor1234@example.com",
+  password: "password",
   first_name: "Doctor",
-  last_name: "Admin",
-  active: true # if you use an `active` flag
+  last_name: "Two",
+  phone_number: "9876543211"
 )
-
-admin.add_role :admin
-puts "✅ Admin user created with email: admin@example.com and password: password"
+doctor.add_role(:doctor)

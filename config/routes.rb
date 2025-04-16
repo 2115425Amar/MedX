@@ -1,5 +1,6 @@
 require "sidekiq/web"
 Rails.application.routes.draw do
+  get 'dashboard/index'
   devise_for :users, controllers: {
     registrations: "users/registrations",
     sessions: "users/sessions" }
@@ -38,5 +39,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
 
   root "home#index"
+
+  get 'dashboard', to: 'dashboard#index'
+
 
 end

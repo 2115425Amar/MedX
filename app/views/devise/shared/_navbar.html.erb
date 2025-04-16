@@ -27,13 +27,15 @@
             <% if current_user %>
               <!-- User Name -->
               <h2 class="text-sm md:text-lg mb-1">
-                <%= current_user.first_name %> <%= current_user.last_name %>
+              <%= current_user.first_name %> <%= current_user.last_name %>
               </h2>
               <!-- User Role -->
               <% if current_user.has_role?(:admin) %>
-                <div class="text-[8%] md:text-sm hidden md:block">Receptionist</div>
+              <div class="text-[8%] md:text-sm hidden md:block">Receptionist</div>
+              <% elsif current_user.has_role?(:doctor) %>
+              <div class="text-[8%] md:text-sm hidden md:block">Doctor</div>
               <% else %>
-                <div class="text-[8%] md:text-sm hidden md:block">Patient</div>
+              <div class="text-[8%] md:text-sm hidden md:block">Patient</div>
               <% end %>
             <% end %>
           </div>
