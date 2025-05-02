@@ -101,6 +101,8 @@
                                        <div x-show="open" @click.outside="open = false" class="absolute right-0 z-10 mt-2 w-16 md:w-16 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
                                           <div class="py-1">
                                              <%= link_to "Delete", manage_user_path(user), data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-800 block py-1 text-sm md:text-lg font-semibold" %>
+                                             <%# link_to 'Delete', manage_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %>
+
                                           </div>
                                        </div>
                                     </div>

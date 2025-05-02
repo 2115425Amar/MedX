@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Devise Auth" %></title>
+    <title><%= content_for(:title) || "MedX" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -14,16 +14,14 @@
     <link rel="icon" href="<%= asset_path('Vector.svg') %>" type="image/svg+xml">
     <link rel="apple-touch-icon" href="<%= asset_path('Vector.svg') %>"> 
 
-      <%# Includes all stylesheet files in app/assets/stylesheets %>
-      <%= turbo_include_tags %>
+    <%# stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
-    <%# stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%# javascript_importmap_tags %>
-    <!-- <script type="module" src="<%# javascript_include_tag 'application', 'data-turbo-track': 'reload' %>"></script>  -->
-     <%# javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module' %>
-
+    <%# isko hatane ke baad reload nhi karna padega %>
+    <%# turbo_include_tags %>
+    
+    <%= javascript_importmap_tags %>
     <%= javascript_include_tag "Chart.bundle" %>
-<%= javascript_include_tag "chartkick" %>
+    <%= javascript_include_tag "chartkick" %>
 
 
 

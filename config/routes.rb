@@ -60,7 +60,7 @@ Rails.application.routes.draw do
 
 
   # Add users resource
-  resources :users, only: [:index, :show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update, :destroy]
   # GET /users → users#index
   # GET /users/:id → users#show
   # GET /users/:id/edit → users#edit
