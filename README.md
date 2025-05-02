@@ -1,11 +1,3 @@
-![alt text](<Screenshot from 2025-04-16 18-40-51.png>)
-![alt text](<Screenshot from 2025-04-16 18-40-57.png>)
-![alt text](<Screenshot from 2025-04-16 18-41-14.png>)
-![alt text](<Screenshot from 2025-04-16 18-41-24.png>)
-![alt text](<Screenshot from 2025-04-16 18-41-35.png>)
-![alt text](<Screenshot from 2025-04-16 18-41-39.png>)
-![alt text](<Screenshot from 2025-04-16 18-41-44.png>)
-![alt text](<Screenshot from 2025-04-16 18-42-01.png>)
 
 # 🏥 Receptionist-Doctor Portal
 

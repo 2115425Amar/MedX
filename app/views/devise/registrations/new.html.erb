@@ -5,7 +5,7 @@
 </head>
 
 <body class="" >
-  <div style="background-image: url(<%= asset_path('bg.jpg') %>);" class="bg-cover md:h-screen">
+  <div style="background-image: url(<%= asset_path('blk2.jpg') %>);" class="bg-cover md:h-screen">
 
   <!-- Navigation Bar -->
   <%= render 'devise/shared/nav' %>
@@ -29,26 +29,24 @@
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { multipart: true }) do |f| %>
           <%# avatar upload %>
           <div class="mx-auto w-16 text-center ">
-
             <div class="w-8 h-8 md:w-16 md:h-16 group rounded-full cursor-pointer transition duration-500 bg-cover bg-center relative"
               style="background-image: url('<%= @user.avatar_public_id.present? ? Cloudinary::Utils.cloudinary_url(@user.avatar_public_id, width: 150, height: 150, crop: :fill) : asset_path('profile.svg') %>');">
               <!-- Background Overlay -->
               <div class="absolute inset-0 bg-black bg-opacity-30 rounded-full"></div>
-
-              <!-- Upload Button -->
-              <div class="relative z-10 flex justify-center items-center h-full">
-                <%= f.label :avatar, class: "text-white text-[1%] md:text-sm font-semibold hover:text-blue-300 cursor-pointer " do %>
-                  Upload
-                  <%= f.file_field :avatar, class: "opacity-0 absolute inset-0 w-full h-full cursor-pointer" %>
-                <% end %>
-              </div>
             </div>
 
+             <!-- Upload Button -->
+            <div class="relative z-10 flex justify-center items-center h-full">
+            <%= f.label :avatar, class: "text-white  hover:bg-blue-600 text-sm font-semibold py-1 px-3 rounded-md cursor-pointer transition-colors" do %>
+              Upload
+              <%= f.file_field :avatar, class: "opacity-0 absolute inset-0 w-full h-full cursor-pointer" %>
+            <% end %>
+            </div>
           </div>
 
           <div>
             <h2 class="text-xl md:text-2xl font-semibold mb-1">Create account</h2>
-            <p class="text-sm text-gray-400">For business, band or celebrity.</p>
+            <p class="text-lg text-gray-400">For business, band or celebrity.</p>
           </div>
 
           <!-- Registration Form -->
@@ -74,8 +72,8 @@
                class: "text-black w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500",
                 placeholder: "Enter your phone number",
                 id: "phone_number", 
-              maxlength: "10", 
-              title: "Please enter a 10-digit phone number" 
+                maxlength: "10", 
+                title: "Please enter a 10-digit phone number" 
                %>
             </div>
           </div>

@@ -1,4 +1,5 @@
-<div id="mySidebar" class="fixed left-0 top-0 h-full p-4 w-full">
+
+<div id="mySidebar" class="fixed left-0 top-0 h-full p-4 w-full shadow-lg">
   <!-- Logo -->
   <div class="flex gap-4 p-2 items-center">
     <%= link_to profile_path, class: "flex items-center gap-4" do %>
@@ -9,6 +10,14 @@
 
   <!-- Menu Items -->
   <ul class="mt-5 space-y-2 font-medium">
+     <li>
+        <%# <div class="flex items-center p-4 text-black hover:text-white rounded-lg bg-white hover:bg-[#377DFF]" >
+          <svg class="shrink-0 w-5 h-5 text-black transition duration-75 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8v-10h-8v10zm0-18v6h8V3h-8z" />
+          </svg>
+          <span class="flex-1 ms-3">Mode</span>
+        </div> %>
+      </li>
      <% if current_user&.doctor? %>
      <li>
         <%= link_to dashboard_path, class: "flex items-center p-4 text-black hover:text-white rounded-lg bg-white hover:bg-[#377DFF] group" do %>

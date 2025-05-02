@@ -25,12 +25,9 @@
 <% end %>
 
   <!-- Users Registered Over Time -->
-  <div class="mb-6">
+  <div class="mt-[10%]">
     <h2 class="text-xl font-semibold mb-2">Users Registered Over Time</h2>
-    <%# line_chart @chart_data, height: "300px" , xtitle: "Date", ytitle: "Users" %>
     <%= line_chart @chart_data, height: "300px", xtitle: "Date & Time", ytitle: "Users" %>
-
   </div>
 
-  <!-- Add more sections as needed -->
 </div>
