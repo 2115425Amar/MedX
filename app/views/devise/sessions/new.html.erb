@@ -1,59 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <title>med - Login</title>
-  <!-- Import Montserrat font from Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>MedX - Login</title>
 </head>
 
-<body class=" text-white relative overflow-hidden font-[Montserrat]">
+<body class="text-white relative overflow-hidden font-[Montserrat]">
   <div style="background-image: url(<%= asset_path('blk.jpg') %>);" class="bg-cover h-screen">
 
-     <!-- Navigation Bar -->
-  <%= render 'devise/shared/nav' %>
-  <hr>
+    <!-- Navigation Bar -->
+    <%= render 'devise/shared/nav' %>
+    <hr class="border-gray-600">
 
     <!-- Main Content - Login Card -->
-    <div class="flex justify-center   items-center mt-[15%] sm:mt-[5%] text-white ">
+    <div class="flex justify-center items-center mt-[15%] sm:mt-[5%] text-white">
       <!-- Login form container with blur effect -->
-      <div class="backdrop-blur-md bg-white/15 sm:h-[60%]  md:w-[25%] rounded-xl p-10  ">
-        <h2 class="text-2xl font-semibold mb-6 ">Login</h2>
+      <div class="backdrop-blur-md bg-white/15 sm:h-[60%] md:w-[25%] rounded-xl p-10">
+        <h2 class="text-2xl font-semibold mb-6">Login</h2>
 
         <!-- Devise Login Form -->
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-4" }) do |f| %>
 
-        <!-- Add this to your login form to display flash messages -->
-            <% if flash[:alert] %>
-                <div id="flash-alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                  <%= flash[:alert] %>
-                </div>
-            <% end %>
+          <!-- Display flash messages -->
+          <% if flash[:alert] %>
+            <div id="flash-alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+              <%= flash[:alert] %>
+            </div>
+          <% end %>
 
-        <!-- Email field -->
-        <div>
-          <label class="block text-sm mb-1 ">Email</label>
-          <%= f.email_field :email,
-                            class: "w-full px-3 py-2 rounded-md  text-black bg-white focus:outline-none focus:border-blue-500",
-                            placeholder: "Enter your email", required: true %>
-        </div>
+          <!-- Email field -->
+          <div>
+            <label class="block text-sm mb-1">Email</label>
+            <%= f.email_field :email,
+                              class: "w-full px-3 py-2 rounded-md text-black bg-white focus:outline-none focus:border-blue-500",
+                              placeholder: "Enter your email", required: true %>
+          </div>
 
-        <!-- Password field -->
-        <div>
-          <label class="block text-sm mb-1 ">Password</label>
-          <%= f.password_field :password,
-            class: "w-full px-3 py-2 rounded-md text-black bg-white focus:outline-none focus:border-blue-500",
-            placeholder: "Enter your password", required: true %>
-        </div>
+          <!-- Password field -->
+          <div>
+            <label class="block text-sm mb-1">Password</label>
+            <div class="relative">
+              <%= f.password_field :password,
+                                   class: "w-full px-3 py-2 rounded-md text-black bg-white focus:outline-none focus:border-blue-500 pr-10",
+                                   placeholder: "Enter your password", required: true, id: "password-field" %>
 
-        <!-- Remember me checkbox -->
-        <div class="flex items-center">
-          <%= f.check_box :remember_me, class: "w-4 h-4 focus:ring-blue-500" %>
-          <label class="ml-2 text-sm">Remember me</label>
-        </div>
+              <!-- Eye icon button -->
+              <button type="button" onclick="togglePasswordVisibility()" class="absolute right-2 top-2 text-gray-600">
+                <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path id="eye-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path id="eye-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+            </div>
+          </div>
 
-        <!-- Submit button -->
-        <%= f.submit "Login", class: "w-[50%] py-2 bg-blue-500 hover:bg-blue-600 rounded-md text-white transition-colors mt-6" %>
+          <!-- Remember me checkbox -->
+          <div class="flex items-center">
+            <%= f.check_box :remember_me, class: "w-4 h-4 focus:ring-blue-500" %>
+            <label class="ml-2 text-sm">Remember me</label>
+          </div>
+
+          <!-- Submit button -->
+          <%= f.submit "Login", class: "w-[50%] py-2 bg-blue-500 hover:bg-blue-600 rounded-md text-white transition-colors mt-6" %>
         <% end %>
 
         <!-- Forgot password & Sign up links -->
@@ -75,36 +85,22 @@
       if (flashAlert) {
         flashAlert.remove();
       }
-    }, 3000); 
+    }, 3000);
+  </script>
+
+  <script>
+    function togglePasswordVisibility() {
+      const passwordField = document.getElementById("password-field");
+      const eyeIcon = document.getElementById("eye-icon");
+
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+      } else {
+        passwordField.type = "password";
+      }
+    }
   </script>
 
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-<!--<h2>Login</h2>-->
-<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-<!--  <div>-->
-    <%#= f.label :email %>
-    <%#= f.email_field :email, required: true %>
-<!--  </div>-->
-
-<!--  <div>-->
-    <%#= f.label :password %>
-    <%#= f.password_field :password, required: true %>
-<!--  </div>-->
-
-<!--  <div>-->
-    <%#= f.submit "Login" %>
-<!--  </div>-->
-<%# end %>
-
-<%#= render "devise/shared/links" %>
-

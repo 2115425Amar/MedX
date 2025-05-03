@@ -21,8 +21,12 @@
 
         <!-- Add this to display flash messages -->
         <% if flash[:alert] %>
-          <div id="flash-alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-            <%= flash[:alert] %>
+        <div id="flash-alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+          <%= flash[:alert] %>
+        </div>
+        <% elsif flash[:notice] %>
+          <div id="flash-notice" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <%= flash[:notice] %>
           </div>
         <% end %>
 
@@ -79,15 +83,39 @@
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-1">
+            <!-- Password field with toggle -->
             <div>
               <%= f.label :password, "Password", class: "block text-sm mb-1" %>
-              <%= f.password_field :password, class: "text-black w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500", placeholder: "Enter your password" %>
+              <div class="relative">
+                <%= f.password_field :password, id: "password-field", class: "text-black w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 pr-10", placeholder: "Enter your password" %>
+                <button type="button" onclick="togglePassword('password-field', 'eye-icon-1')" class="absolute right-2 top-2 text-gray-600">
+                  <svg id="eye-icon-1" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </button>
+              </div>
             </div>
+
+            <!-- Confirm Password field with toggle -->
             <div>
               <%= f.label :password_confirmation, "Confirm Password", class: "block text-sm mb-1" %>
-              <%= f.password_field :password_confirmation, class: "text-black w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500", placeholder: "Confirm your password" %>
+              <div class="relative">
+                <%= f.password_field :password_confirmation, id: "password-confirmation-field", class: "text-black w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 pr-10", placeholder: "Confirm your password" %>
+                <button type="button" onclick="togglePassword('password-confirmation-field', 'eye-icon-2')" class="absolute right-2 top-2 text-gray-600">
+                  <svg id="eye-icon-2" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
+
           
           <!-- Remember me checkbox -->
           <div class="space-y-2 mt-4">
@@ -120,6 +148,18 @@
       }
     }, 3000); 
   </script>
+  <script>
+  function togglePassword(fieldId, iconId) {
+    const field = document.getElementById(fieldId);
+    const icon = document.getElementById(iconId);
+    if (field.type === "password") {
+      field.type = "text";
+    } else {
+      field.type = "password";
+    }
+  }
+</script>
+
 
 </body>
 
