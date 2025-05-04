@@ -49,10 +49,8 @@ class User < ApplicationRecord
   end
 
 private
-
   def upload_avatar
     return unless avatar.present? # Ensure avatar is present
-
     # Rails.logger.info "Uploading avatar..."
     response = Cloudinary::Uploader.upload(avatar, folder: "avatars")
     self.update_column(:avatar_public_id, response["public_id"])  # Save public ID in DB

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
    <title>Register</title>
+    <link rel="preload" as="image" href="<%= asset_path('blk2.jpg') %>">
 </head>
 
 <body class="" >
@@ -34,7 +35,7 @@
           <%# avatar upload %>
           <div class="mx-auto w-16 text-center ">
             <div class="w-8 h-8 md:w-16 md:h-16 group rounded-full cursor-pointer transition duration-500 bg-cover bg-center relative"
-              style="background-image: url('<%= @user.avatar_public_id.present? ? Cloudinary::Utils.cloudinary_url(@user.avatar_public_id, width: 150, height: 150, crop: :fill) : asset_path('profile.svg') %>');">
+              style="background-image: url('<%= @user.avatar_public_id.present? ? Cloudinary::Utils.cloudinary_url(@user.avatar_public_id, width: 150, height: 150, crop: :fill) : asset_path('imageavatar.jpg') %>');">
               <!-- Background Overlay -->
               <div class="absolute inset-0 bg-black bg-opacity-30 rounded-full"></div>
             </div>
