@@ -1,0 +1,81 @@
+<div id="mySidebar" class="fixed left-0 top-0 h-full p-4 w-full shadow-lg">
+  <!-- Logo -->
+  <div class="flex gap-4 p-2 items-center">
+    <%= link_to profile_path, class: "flex items-center gap-4" do %>
+      <img src="<%= asset_path('Vector.svg') %>" class="w-8 md:w-10" alt="icon">
+      <p class="text-2xl md:text-4xl font-serif font-semibold text-gray-800">MedX</p>
+    <% end %>
+  </div>
+
+  <!-- Menu Items -->
+  <ul class="mt-5 space-y-2 font-medium">
+     <li>
+      
+      </li>
+     <% if current_user&.doctor? %>
+     <li>
+        <%= link_to dashboard_path, class: "flex items-center p-4 text-black hover:text-white rounded-lg bg-white  hover:bg-[#377DFF] group" do %>
+          <svg class="shrink-0 w-5 h-5 text-black transition duration-75 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8v-10h-8v10zm0-18v6h8V3h-8z" />
+          </svg>
+          <span class="flex-1 ms-3">Dashboard</span>
+        <% end %>
+      </li>
+
+       <li>
+        <%= link_to manage_users_path, class: "flex items-center p-4 text-black hover:text-white rounded-lg bg-white hover:bg-[#377DFF] group" do %>
+          <svg class="shrink-0 w-5 h-5 text-black transition duration-75 group-hover:text-white" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
+            <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+          </svg>
+          <span class="flex-1 ms-3">Manage Account</span>
+        <% end %>
+      </li>
+      
+      <%end%>
+    <% if current_user&.admin? %>
+     
+      <li>
+        <%= link_to manage_users_path, class: "flex items-center p-4 text-black hover:text-white rounded-lg bg-white hover:bg-[#377DFF] group" do %>
+          <svg class="shrink-0 w-5 h-5 text-black transition duration-75 group-hover:text-white" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
+            <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+          </svg>
+          <span class="flex-1 ms-3">Manage Account</span>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to reports_path, class: "flex items-center p-4 text-black hover:text-white rounded-lg bg-white hover:bg-[#377DFF] group" do %>
+          <img src="<%= asset_path('report.svg') %>" class="w-4 shrink-0 w-5 h-5 text-black transition duration-75 group-hover:text-white" alt="icon">
+          <span class="flex-1 ms-3">Reports</span>
+        <% end %>
+      </li>
+    <% end %>
+
+    <li>
+      <%= link_to profile_path, class: "flex items-center p-4 text-black hover:text-white rounded-lg bg-white hover:bg-[#377DFF] group" do %>
+        <svg class="shrink-0 w-5 h-5 text-black transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" xml:space="preserve">
+          <path d="M16 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12c-2.757 0-5 2.243-5 5s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM27 32a1 1 0 0 1-1-1v-6.115a6.95 6.95 0 0 0-6.942-6.943h-6.116A6.95 6.95 0 0 0 6 24.885V31a1 1 0 1 1-2 0v-6.115c0-4.93 4.012-8.943 8.942-8.943h6.116c4.93 0 8.942 4.012 8.942 8.943V31a1 1 0 0 1-1 1z" />
+        </svg>
+        <span class="flex-1 ms-3">Profile</span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to posts_path, class: "flex items-center p-4 text-black hover:text-white rounded-lg bg-white hover:bg-[#377DFF] group" do %>
+        <svg class="shrink-0 w-5 h-5 text-black transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+          <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
+        </svg>
+        <span class="flex-1 ms-3">Feed</span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "flex items-center p-4 text-black rounded-lg bg-white hover:text-white hover:bg-[#377DFF] group" do %>
+        <svg class="shrink-0 w-5 h-5 text-black transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
+        </svg>
+        <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
+      <% end %>
+    </li>
+  </ul>
+</div>
