@@ -89,3 +89,5 @@ gem 'chart-js-rails'
 # gem 'chart-js' # Or 'chartkick' and 'chartjs' via npm if using webpacker
 
 gem "chartkick", "~> 5.1"
+
+gem 'csv'
